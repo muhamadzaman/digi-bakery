@@ -13,10 +13,10 @@ module CodingChallenge
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    Pusher.app_id = '1645459'
-    Pusher.key = '5f30979398905b369d52'
-    Pusher.secret = 'e1003e02a049810c0eb0'
-    Pusher.cluster = 'us3'
+    Pusher.app_id = ENV['PUSHER_APP_ID']  #Replace creds with envs
+    Pusher.key = ENV['PUSHER_API_KEY']
+    Pusher.secret = ENV['PUSHER_SECRET_KEY']
+    Pusher.cluster = ENV['PUSHER_CLUSTER']
     config.generators do |g|
       g.test_framework :rspec,
                        fixtures: true,

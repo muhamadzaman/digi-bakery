@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function checkCookieStatus() {
-    const pusher = new Pusher('5f30979398905b369d52', {
-        cluster: 'us3'
+    const pusher = new Pusher(ENV['PUSHER_API_KEY'], {     //Replace cred with envs
+        cluster: ENV['PUSHER_CLUSTER']
       });
 
     const channel = pusher.subscribe('CookieChannel');

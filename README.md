@@ -41,7 +41,7 @@ This application is built using:
 - Ruby 3.2.*
 - Node
 - NPM
-- Pusher Gem: Used for real-time updates and notifications
+- Pusher Gem: Used for real-time updates and notifications (environment variables used for creds)
 - Background Jobs: Used for cooking cookies asynchronously
 
 ## Installation and Testing
