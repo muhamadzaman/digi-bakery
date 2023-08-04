@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :ovens, dependent: :destroy
-  has_many :stored_cookies, class_name: 'Cookie', as: :storage
+  has_many :stored_cookies, class_name: 'BatchCookie', as: :storage
 
   before_create :setup_first_oven
 

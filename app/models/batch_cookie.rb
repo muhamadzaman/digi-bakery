@@ -1,9 +1,7 @@
-class Cookie < ActiveRecord::Base
+class BatchCookie < ActiveRecord::Base
   belongs_to :storage, polymorphic: :true
   
   validates :storage, presence: true
 
-  def ready?
-    true
-  end
+  enum status: %w{ unfinished cooking ready }
 end
