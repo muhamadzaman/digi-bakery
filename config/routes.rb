@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users
 
@@ -8,9 +10,10 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
 
   resources :ovens do
-    resource :cookies
+    resource :batch_cookies
     member do
       post :empty
+      get :check_status
     end
   end
 
@@ -18,9 +21,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :orders, only: [:index] do
-      put :fulfill, on: :member
+      patch :update, on: :member
     end
   end
 
+  mount Sidekiq::Web => '/sidekiq'
   # mount MailPreview => 'mail_view' if Rails.env.development?
 end
