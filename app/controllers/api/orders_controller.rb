@@ -4,9 +4,8 @@ class Api::OrdersController < Api::BaseController
     @orders = Order.all.order(created_at: :desc)
   end
 
-  def fulfill
+  def update
     @order = Order.find(params[:id])
-    @order.fulfilled = true
-    @order.save!
+    @order.update!(fulfilled: true)
   end
 end
