@@ -2,15 +2,21 @@ require_relative 'boot'
 
 require 'rails/all'
 
+require 'pusher'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module CodingChallenge
   class Application < Rails::Application
+    config.active_job.queue_adapter = :sidekiq
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    Pusher.app_id = '1645459'
+    Pusher.key = '5f30979398905b369d52'
+    Pusher.secret = 'e1003e02a049810c0eb0'
+    Pusher.cluster = 'us3'
     config.generators do |g|
       g.test_framework :rspec,
                        fixtures: true,
