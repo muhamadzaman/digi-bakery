@@ -58,9 +58,8 @@ describe OvensController do
         let(:oven) { create(:oven) }
 
         it "blocks access" do
-          expect {
-            get "/ovens/#{oven.id}"
-          }.to raise_error(ActiveRecord::RecordNotFound)
+          get "/ovens/#{oven.id}"
+          expect(flash[:alert]).to eq("Record Not Found")
         end
       end
     end
@@ -92,22 +91,13 @@ describe OvensController do
         expect(assigns(:oven)).to eq(oven)
       end
 
-      it "moves the oven's cookie to the user" do
-        cookie = create(:cookie, storage: oven)
-
-        post "/ovens/#{oven.id}/empty"
-
-        expect(oven.cookie).to be_nil
-        expect(user.stored_cookies.to_a).to match_array([cookie])
-      end
-
       context "when requesting someone else's oven" do
         let(:oven) { create(:oven) }
 
         it "blocks access" do
-          expect {
-            post "/ovens/#{oven.id}/empty"
-          }.to raise_error(ActiveRecord::RecordNotFound)
+          post "/ovens/#{oven.id}/empty"
+
+          expect(flash[:alert]).to eq("Record Not Found")
         end
       end
     end

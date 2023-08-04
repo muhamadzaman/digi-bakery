@@ -14,7 +14,7 @@ feature 'Order listing', :devise, :js do
   end
 
   scenario 'user can view orders' do
-    visit root_path
+    visit orders_path
     click_link "Order listing"
 
     expect(page).to have_selector ".orders-table"

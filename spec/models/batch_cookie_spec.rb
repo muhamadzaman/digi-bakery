@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe Cookie do
-  subject { Cookie.new }
+describe BatchCookie do
+  subject { BatchCookie.new }
 
   describe "associations" do
     it { should belong_to(:storage) }
