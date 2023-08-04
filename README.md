@@ -1,129 +1,69 @@
-=======
-# DigiBakery
+# DigiBakery - Digital Bakery Management System
 
-DigiBakery is an artisanal digital bakery, crafting the finest digital cookies in the world.
-
-We don't mass produce our cookies in faceless factories. Instead, We bake cookies to order, one at a time.
+DigiBakery is a digital bakery management system that allows bakery owners to manage their orders, ovens, and cookies efficiently. With DigiBakery, you can bake cookies to order, one at a time, just like in an artisanal bakery.
 
 ## Backlog
 
-The following backlog contains several bugs and features needing attention. Please resolve each item in order.
-
-Please try not to spend more than 4 hours on this exercise. We are not looking for a perfect solution, but rather a demonstration of your ability to work with the technologies, and your approach to resolving each item.
-
-> **IMPORTANT!** 🔥
->
-> Please do not fork this repository. Instead, clone it to your local machine and push your changes to a new **_PRIVATE_** repository in your own GitHub account. This will allow us to review your work in isolation.
+The following backlog contains several bugs and features that have been addressed in this project:
 
 ### Bug: React console warning
 
-When visiting the Order Listing page, I see the following warning:
+When visiting the Order Listing page, the warning message "Warning: Each child in an array or iterator should have a unique 'key' prop." has been resolved. This ensures a smooth user experience without any console warnings.
 
-"Warning: Each child in an array or iterator should have a unique "key" prop."
+### Feature: Place a batch of cookies into an oven
 
-We should resolve this.
+As a bakery owner, you can place a sheet with multiple cookies into an oven. You can visit the oven page and prepare a batch of cookies with the same filling. Once the batch of cookies is finished cooking, you can easily remove the cookies into your store inventory.
 
-### Feature: As a bakery owner, I should be able to place a sheet with multiple cookies into an oven
+### Feature: Cook the cookies
 
-Given I have an oven
+The cookies are now cooked realistically. When a cookie is placed in the oven, a background cooking worker is triggered to cook the cookies for a couple of minutes. The cookies' state is updated accordingly after cooking is complete.
 
-When I am on the oven page
+### Feature: Real-time updates on the oven page
 
-Then I should be able to prepare a batch of cookies with the same filling
+As a bakery owner with unfinished cookies in an oven and on the oven page, you will see that the cookies are not yet ready. When the cookies finish cooking, the oven page automatically updates to display that the cookies are ready. The update can be non-instant, implemented through periodic polling, ensuring a seamless user experience.
 
-When the batch of cookies is finished cooking
+### Feature: Loading indicator for Order Listing
 
-Then I should be able to remove the cookies into my store inventory
-
-### Feature: cookies should actually be cooked
-
-We lazily added to Cookie: def ready?; true; end
-
-But, the cookies are not actually ready instantly! When a cookie is placed in the oven, we need to trigger a background cooking worker to cook the cookies and update their state after a couple minutes of "cooking"
-
-### Feature: As a bakery owner, I should see the oven page update automatically when the cookies are ready
-
-Given I have unfinished cookies in an oven
-
-And I am on the oven page
-
-Then I should see that the cookies are not yet ready
-
-When the cookies finish cooking
-
-Then I should see that the cookies are ready
-
-> **Note:** This can be non-instant (e.g. performed through periodic polling is acceptable), but only the relevant part of the page should update.
-
-### Feature: Add loading indicator for Order Listing
-
-Given there are orders in the system
-
-When I visit the orders page
-
-Then I should see a loading indicator that signifies that order data is being fetched
-
-When the data has finished loading
-
-Then I see the order listing
+When there are orders in the system, visiting the orders page will show a loading indicator while the order data is being fetched. Once the data has finished loading, the order listing will be displayed, improving user feedback during data retrieval.
 
 ### Feature: Sorting order listing table
 
-Given there are orders in the system
-
-When I visit the orders page
-
-Then I should see "Order #", "Customer Name" and "Pick up at" column headers underlined, signifying that i can click on the header to sort the column
-
-When I click on a sortable column header
-
-Then the data in the table is reordered by that particular column in ascending order
+The orders page now includes sortable columns for "Order #", "Customer Name," and "Pick up at". You can click on the column header to sort the table in ascending order based on that particular column.
 
 ### Feature: Marking orders fulfilled
 
-Given there are orders in the system
+For unfulfilled (in-progress) orders, the actions column now includes a button called "Fulfill order". Clicking on this button disables it for that row. Once the order has been fulfilled through an API call, the button for that row disappears, and the order status is updated. The order status remains visible even after refreshing the page.
 
-When I visit the orders page
+## Technologies Used
 
-Then I should see that unfulfilled (in progress) orders have a button in the actions column called "Fulfill order".
-
-When I click on "Fulfill order"
-
-Then the button for that row becomes disabled
-
-When the order has been fulfilled (by API call)
-The button for that row disappears
-And the order status for that row is updated
-
-When I refresh the page
-I can see that the order status still says Fulfilled
-
-## Requirements
-
-This application requires:
+This application is built using:
 
 - Ruby 3.2.*
 - Node
 - NPM
+- Pusher Gem: Used for real-time updates and notifications
+- Background Jobs: Used for cooking cookies asynchronously
 
-## Dependency Installation
+## Installation and Testing
+
+To get started with DigiBakery, follow these steps:
+
+1. Clone the repository to your local machine.
+2. Install the required dependencies:
 
 ```bash
 bundle install
 npm install
 ```
 
-## Test Suite
-
-Like most bakeries, DigiBakery has a test suite. The full suite can be run with:
-
-```bash
-rspec spec
-```
-
-## Database Seed Data
+3. Set up the database and seed data:
 
 ```bash
 rails db:setup
 ```
->>>>>>> b3b7b5b (Test Project)
+
+4. Run the test suite to ensure everything is working correctly:
+
+```bash
+rspec spec
+```
